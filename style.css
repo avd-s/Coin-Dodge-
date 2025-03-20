@@ -109,7 +109,8 @@ canvas {
         display: flex;
     }
     canvas {
-        width: 75vw;
-        height: 75vh;
+        width: 100vw;   /* Viewport width */
+        height: 100vh;  /* Viewport height */
+        touch-action: none; /* Prevent unintended gestures */
     }
 }
