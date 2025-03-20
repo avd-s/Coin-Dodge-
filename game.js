@@ -284,32 +284,18 @@ export class Game {
 
 function adjustCanvasSize() {
     const canvas = document.querySelector("canvas");
-    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent); // Detect mobile
 
-    if (isMobile) {
-        // Set full height, ignoring Safari UI shifts
-        document.documentElement.style.height = "100dvh";
-        document.body.style.height = "100dvh";
-
-        // Get the exact viewport height
-        const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-        
-        canvas.width = window.innerWidth;
-        canvas.height = viewportHeight;
-
-        // Prevent accidental scrolling
-        window.scrollTo(0, 0);
-    } else {
-        // Normal behavior for laptops
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
+    // Remove any default margins that might be causing extra space
+    document.body.style.margin = "0";
+    document.documentElement.style.margin = "0";
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
 
-// Apply fix when page loads and when resized
+// Apply fix on load and resize
 window.addEventListener("load", adjustCanvasSize);
 window.addEventListener("resize", adjustCanvasSize);
-window.visualViewport?.addEventListener("resize", adjustCanvasSize);
 
 
 
