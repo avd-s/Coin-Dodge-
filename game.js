@@ -87,32 +87,15 @@ export class Game {
 
   setupMobileControls() {
     if ('ontouchstart' in window) {
-        let lastTouchX = null;
-
-        const handleTouchMove = (e) => {
-            e.preventDefault(); // Prevent scrolling & default behaviors
-            const rect = this.canvas.getBoundingClientRect();
-            lastTouchX = e.touches[0].clientX - rect.left;
-        };
-
-        const updatePlayerPosition = () => {
-            if (lastTouchX !== null) {
-                this.mouseX = lastTouchX;
-                this.usingMouse = true;
-            }
-            requestAnimationFrame(updatePlayerPosition); // Smooth updates
-        };
-
-        this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        this.canvas.addEventListener('touchstart', handleTouchMove, { passive: false });
-
-        this.canvas.addEventListener('touchend', () => {
-            this.mouseX = null;
-            this.usingMouse = false;
-        });
-
-        requestAnimationFrame(updatePlayerPosition); // Start update loop
+        this.canvas.addEventListener('touchstart', this.handleTouch.bind(this), { passive: false });
+        this.canvas.addEventListener('touchmove', this.handleTouch.bind(this), { passive: false });
     }
+}
+
+handleTouch(e) {
+    e.preventDefault(); // Prevent scrolling
+    const rect = this.canvas.getBoundingClientRect();
+    this.player.x = e.touches[0].clientX - rect.left; // Directly set player position
 }
 
 
