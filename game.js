@@ -86,22 +86,35 @@ export class Game {
     }
 
     setupMobileControls() {
-        if ('ontouchstart' in window) {
-            // Handle touch drag movement on the canvas
-            this.canvas.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-                const rect = this.canvas.getBoundingClientRect();
-                this.mouseX = e.touches[0].clientX - rect.left;
+    if ('ontouchstart' in window) {
+        let lastTouchX = null;
+
+        const handleTouchMove = (e) => {
+            e.preventDefault(); // Prevent scrolling & default behaviors
+            const rect = this.canvas.getBoundingClientRect();
+            lastTouchX = e.touches[0].clientX - rect.left;
+        };
+
+        const updatePlayerPosition = () => {
+            if (lastTouchX !== null) {
+                this.mouseX = lastTouchX;
                 this.usingMouse = true;
-            });
-    
-            // Stop movement when touch ends
-            this.canvas.addEventListener('touchend', () => {
-                this.mouseX = null;
-                this.usingMouse = false;
-            });
-        }
+            }
+            requestAnimationFrame(updatePlayerPosition); // Smooth updates
+        };
+
+        this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        this.canvas.addEventListener('touchstart', handleTouchMove, { passive: false });
+
+        this.canvas.addEventListener('touchend', () => {
+            this.mouseX = null;
+            this.usingMouse = false;
+        });
+
+        requestAnimationFrame(updatePlayerPosition); // Start update loop
     }
+}
+
 
     spawnCoin() {
         // Ensure coin stays within bounds
