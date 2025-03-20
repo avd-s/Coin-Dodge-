@@ -297,5 +297,12 @@ function adjustCanvasSize() {
 window.addEventListener("load", adjustCanvasSize);
 window.addEventListener("resize", adjustCanvasSize);
 
+if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    window.addEventListener("keydown", function(e) {
+        e.preventDefault(); // Stop iOS from thinking it needs assist buttons
+    }, { passive: false });
+}
+
+
 
 
