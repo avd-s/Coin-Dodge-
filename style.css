@@ -86,4 +86,7 @@ canvas {
         width: 80%;
         text-align: center;
     }
+    button {
+    display: none !important; /* Hide any unexpected buttons */
+ }
 }
