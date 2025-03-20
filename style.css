@@ -108,9 +108,20 @@ canvas {
     #mobile-controls {
         display: flex;
     }
+   html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent scrolling */
+        touch-action: none; /* Disable gestures */
+        background-color: black; /* Optional for styling */
+    }
+
     canvas {
-        width: 100vw;   /* Viewport width */
-        height: 100vh;  /* Viewport height */
-        touch-action: none; /* Prevent unintended gestures */
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;  /* Full viewport width */
+        height: 100vh; /* Full viewport height */
     }
 }
