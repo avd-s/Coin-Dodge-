@@ -77,7 +77,7 @@ canvas {
     background: #535bf2;
 }
 
-@media (max-width: 1024px) { /* Covers iPhones, iPads & large phones */
+@media (max-width: 768px) { /* Covers iPhones, iPads & large phones */
     canvas {
         position: fixed;
         left: 0;
