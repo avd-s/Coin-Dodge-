@@ -83,5 +83,12 @@ canvas {
         font-size: 24px;
         padding: 20px 40px;
         width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        text-align: center;
     }
 }
