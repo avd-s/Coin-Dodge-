@@ -85,7 +85,7 @@ export class Game {
         });
     }
 
-   setupMobileControls() {
+  setupMobileControls() {
     if ('ontouchstart' in window) {
         let lastTouchX = null;
 
@@ -95,20 +95,23 @@ export class Game {
             lastTouchX = e.touches[0].clientX - rect.left;
         };
 
-        this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        this.canvas.addEventListener('touchstart', handleTouchMove, { passive: false });
-
-        this.canvas.addEventListener('touchend', () => {
-            lastTouchX = null; // Keep last position instead of resetting to null
-        });
-
-        // Modify the main game update function to use lastTouchX
-        this.updatePlayer = () => {
+        const updatePlayerPosition = () => {
             if (lastTouchX !== null) {
                 this.mouseX = lastTouchX;
                 this.usingMouse = true;
             }
+            requestAnimationFrame(updatePlayerPosition); // Smooth updates
         };
+
+        this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        this.canvas.addEventListener('touchstart', handleTouchMove, { passive: false });
+
+        this.canvas.addEventListener('touchend', () => {
+            this.mouseX = null;
+            this.usingMouse = false;
+        });
+
+        requestAnimationFrame(updatePlayerPosition); // Start update loop
     }
 }
 
