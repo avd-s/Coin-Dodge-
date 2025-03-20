@@ -293,23 +293,6 @@ function adjustCanvasSize() {
     canvas.height = window.innerHeight;
 }
 
-// Apply fix on load and resize
-window.addEventListener("load", adjustCanvasSize);
-window.addEventListener("resize", adjustCanvasSize);
-
-if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    document.addEventListener("keydown", function(e) {
-        e.preventDefault();
-    }, { passive: false });
-
-    document.addEventListener("touchstart", function(e) {
-        e.preventDefault();
-    }, { passive: false });
-
-    document.querySelectorAll("button, input, textarea").forEach(el => el.remove());
-
-    document.body.style.overscrollBehavior = "contain"; // Stops pull-to-refresh
-}
 
 
 
