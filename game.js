@@ -297,10 +297,18 @@ function adjustCanvasSize() {
 window.addEventListener("load", adjustCanvasSize);
 window.addEventListener("resize", adjustCanvasSize);
 
-if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    window.addEventListener("keydown", function(e) {
-        e.preventDefault(); // Stop iOS from thinking it needs assist buttons
+if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    document.addEventListener("keydown", function(e) {
+        e.preventDefault();
     }, { passive: false });
+
+    document.addEventListener("touchstart", function(e) {
+        e.preventDefault();
+    }, { passive: false });
+
+    document.querySelectorAll("button, input, textarea").forEach(el => el.remove());
+
+    document.body.style.overscrollBehavior = "contain"; // Stops pull-to-refresh
 }
 
 
