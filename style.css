@@ -77,7 +77,6 @@ canvas {
 
 @media (max-width: 768px) {
     canvas {
-        height: 100%;
         width: 100vw;
     }
     #restart-button {
@@ -86,7 +85,4 @@ canvas {
         width: 80%;
         text-align: center;
     }
-    button {
-    display: none !important; /* Hide any unexpected buttons */
- }
 }
