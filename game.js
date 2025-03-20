@@ -87,31 +87,19 @@ export class Game {
 
     setupMobileControls() {
     if ('ontouchstart' in window) {
-        let lastTouchX = null;
-
-        const handleTouchMove = (e) => {
-            e.preventDefault(); // Prevent scrolling & default behaviors
+        // Handle touch drag movement on the canvas
+        this.canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
             const rect = this.canvas.getBoundingClientRect();
-            lastTouchX = e.touches[0].clientX - rect.left;
-        };
+            this.mouseX = e.touches[0].clientX - rect.left;
+            this.usingMouse = true;
+        });
 
-        const updatePlayerPosition = () => {
-            if (lastTouchX !== null) {
-                this.mouseX = lastTouchX;
-                this.usingMouse = true;
-            }
-            requestAnimationFrame(updatePlayerPosition); // Smooth updates
-        };
-
-        this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        this.canvas.addEventListener('touchstart', handleTouchMove, { passive: false });
-
+        // Stop movement when touch ends
         this.canvas.addEventListener('touchend', () => {
             this.mouseX = null;
             this.usingMouse = false;
         });
-
-        requestAnimationFrame(updatePlayerPosition); // Start update loop
     }
 }
 
