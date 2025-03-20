@@ -282,16 +282,7 @@ export class Game {
     }
 }
 
-function adjustCanvasSize() {
-    const canvas = document.querySelector("canvas");
 
-    // Remove any default margins that might be causing extra space
-    document.body.style.margin = "0";
-    document.documentElement.style.margin = "0";
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
 
 
 
