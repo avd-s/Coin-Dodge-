@@ -77,6 +77,8 @@ canvas {
 
 @media (max-width: 768px) {
     canvas {
+        height: 100dvh; /* Full height, avoiding browser UI issues */
+        touch-action: none; /* Prevent scrolling on touch */
         width: 100vw;
     }
     #restart-button {
