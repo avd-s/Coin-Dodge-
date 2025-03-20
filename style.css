@@ -76,8 +76,12 @@ canvas {
 
 
 @media (max-width: 768px) {
+    canvas {
+        height: 100dvh; /* Ensures full use of available screen on mobile */
+    }
     #restart-button {
         font-size: 24px;
         padding: 20px 40px;
+        width: 80%;
     }
 }
