@@ -113,6 +113,12 @@ export class Game {
 
         requestAnimationFrame(updatePlayerPosition); // Start update loop
     }
+    this.canvas.addEventListener('touchend', (e) => {
+    e.preventDefault(); // Stop any default touch behavior
+    e.stopPropagation(); // Prevent event from bubbling up
+    this.mouseX = null;
+    this.usingMouse = false;
+}, { passive: false });
 }
 
     spawnCoin() {
