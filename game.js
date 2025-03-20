@@ -283,3 +283,23 @@ export class Game {
 }
 
 
+function adjustCanvasSize() {
+    const canvas = document.querySelector("canvas");
+    const isMobile = window.innerWidth <= 768; // Detect mobile devices
+
+    if (isMobile) {
+        const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = viewportHeight;
+    } else {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+}
+
+// Apply the fix on page load and when the viewport resizes
+window.addEventListener("load", adjustCanvasSize);
+window.addEventListener("resize", adjustCanvasSize);
+window.visualViewport?.addEventListener("resize", adjustCanvasSize);
+
+
