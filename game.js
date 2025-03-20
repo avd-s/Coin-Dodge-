@@ -95,25 +95,23 @@ export class Game {
             lastTouchX = e.touches[0].clientX - rect.left;
         };
 
-        const updatePlayerPosition = () => {
-            if (lastTouchX !== null) {
-                this.mouseX = lastTouchX;
-                this.usingMouse = true;
-            }
-            requestAnimationFrame(updatePlayerPosition); // Smooth updates
-        };
-
         this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
         this.canvas.addEventListener('touchstart', handleTouchMove, { passive: false });
 
         this.canvas.addEventListener('touchend', () => {
-            this.mouseX = null;
-            this.usingMouse = false;
+            lastTouchX = null; // Keep last position instead of resetting to null
         });
 
-        requestAnimationFrame(updatePlayerPosition); // Start update loop
+        // Modify the main game update function to use lastTouchX
+        this.updatePlayer = () => {
+            if (lastTouchX !== null) {
+                this.mouseX = lastTouchX;
+                this.usingMouse = true;
+            }
+        };
     }
 }
+
 
     spawnCoin() {
         // Ensure coin stays within bounds
