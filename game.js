@@ -86,38 +86,21 @@ export class Game {
     }
 
     setupMobileControls() {
-        const mobileControls = document.getElementById('mobile-controls');
-        const leftBtn = document.getElementById('left-btn');
-        const rightBtn = document.getElementById('right-btn');
-
         if ('ontouchstart' in window) {
-            mobileControls.classList.remove('hidden');
-
-            leftBtn.addEventListener('touchstart', (e) => {
+            // Handle touch drag movement on the canvas
+            this.canvas.addEventListener('touchmove', (e) => {
                 e.preventDefault();
-                this.keys.left = true;
+                const rect = this.canvas.getBoundingClientRect();
+                this.mouseX = e.touches[0].clientX - rect.left;
+                this.usingMouse = true;
+            });
+    
+            // Stop movement when touch ends
+            this.canvas.addEventListener('touchend', () => {
+                this.mouseX = null;
                 this.usingMouse = false;
             });
-            leftBtn.addEventListener('touchend', () => this.keys.left = false);
-            rightBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this.keys.right = true;
-                this.usingMouse = false;
-            });
-            rightBtn.addEventListener('touchend', () => this.keys.right = false);
         }
-
-        this.canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const rect = this.canvas.getBoundingClientRect();
-            this.mouseX = e.touches[0].clientX - rect.left;
-            this.usingMouse = true;
-        });
-
-        this.canvas.addEventListener('touchend', () => {
-            this.mouseX = null;
-            this.usingMouse = false;
-        });
     }
 
     spawnCoin() {
