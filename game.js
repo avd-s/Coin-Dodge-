@@ -282,3 +282,14 @@ export class Game {
         this.start();
     }
 }
+
+
+function adjustCanvasSize() {
+    const canvas = document.querySelector("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Run function when page loads and when window resizes
+window.addEventListener("load", adjustCanvasSize);
+window.addEventListener("resize", adjustCanvasSize);
